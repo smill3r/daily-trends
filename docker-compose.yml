@@ -6,7 +6,7 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - MONGO_URL=mongodb://mongo:27017/mydatabase
+      - MONGO_URL=mongodb://mongo:27017/dailytrends
     depends_on:
       - mongo
 

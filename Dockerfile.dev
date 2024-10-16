@@ -14,10 +14,10 @@ RUN npm install
 COPY . .
 
 # Install ts-node globally
-RUN npm install -g ts-node
+RUN npm install -g tsx
 
 # Expose the port your app runs on
 EXPOSE 3000
 
 # Use Nodemon with ts-node to watch for file changes and restart on updates
-CMD ["npx", "nodemon", "--watch", ".", "--exec", "ts-node", "src/app.ts"]
+CMD ["npx", "nodemon", "--watch", ".", "--exec", "tsx", "src/app.ts"]
