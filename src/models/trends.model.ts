@@ -1,21 +1,21 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { Trend } from "../types/interfaces/trend";
 
-export interface ITrend extends Document {
-    title: string;
-    content: string;
-    publishedAt: Date;
-    imageURL: string;
-    source: string;
-}
+export interface ITrend extends Document, Trend {}
 
 const trendSchema: Schema = new Schema({
-    title: {type: String, required: true},
-    content: {type: String, required: true},
-    publishedAt: {type: Date, required: true},
-    imageUrl: {type: String, default: ''},
-    source: {type: String, required: true}
-})
+  title: { type: String, required: true },
+  subtitle: { type: String, required: false },
+  authorName: { type: String, required: true },
+  authorUrl: { type: String, required: true },
+  publishedDate: { type: String, required: true },
+  imageUrl: { type: String, required: false },
+  imageCaption: { type: String, required: false },
+  imageAuthor: { type: String, required: false },
+  body: { type: String, required: true },
+  source: { type: String, required: true }
+});
 
-const Trends = mongoose.model<ITrend>('Trend', trendSchema);
+const Trend = mongoose.model<ITrend>("Trend", trendSchema);
 
-export default Trends;
+export default Trend;

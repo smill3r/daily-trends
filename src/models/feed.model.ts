@@ -4,13 +4,13 @@ import { ITrend } from "./trends.model";
 export interface IFeed extends Document {
   title: string;
   date: Date;
-  news: ITrend[];
+  trends: ITrend[];
 }
 
 const feedSchema: Schema = new Schema({
   title: { type: String, required: true },
-  date: { type: Date, required: true },
-  news: [{ type: Schema.Types.ObjectId, ref: "News" }],
+  date: { type: Date, required: true, default: Date.now },
+  trends: [{ type: Schema.Types.ObjectId, ref: "Trend" }],
 });
 
 const Feed = mongoose.model<IFeed>("Feed", feedSchema);
