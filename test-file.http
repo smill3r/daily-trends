@@ -1,0 +1,41 @@
+
+// Create feed (trough scrapping)
+POST http://localhost:3000/feed
+
+###
+
+// Get today feed with trends
+GET http://localhost:3000/feed
+
+###
+
+// Delete feed by id
+DELETE http://localhost:3000/feed/670fc3635adca4b99eecf63a
+
+###
+
+// Get list of all trends
+GET http://localhost:3000/trend
+Content-Type: application/json
+
+###
+
+// Update an existing trend
+PUT http://localhost:3000/trend/670fb78e0795950285527d98
+Content-Type: application/json
+
+{"_id":"670fb78e0795950285527d98","title":"Última hora de la actualidad política, en directo |  El fiscal general del Estado rechaza dimitir pese a la imputación del Supremo y defiende su actuación frente a los bulos","subtitle":"El Gobierno muestra su “total respaldo” a García Ortiz: “Todo lo que ha hecho ha sido contar la verdad y desmentir un bulo”","authorName":"El Pruebas","authorUrl":"https://elpais.com/autor/el-pais/#?rel=author_top","publishedDate":"Actualizado: 16 oct 2024 - 14:44CEST","imageUrl":"https://imagenes.elpais.com/resizer/v2/AV4FC3U32VHMHE2CRIE2ZPD324.jpg?auth=e6984064c65899a15b3812f3317d8a014dee4a1e0077fba8d63e26e83ec2c317&width=414","imageCaption":"El fiscal general del Estado, Álvaro García Ortiz, el pasado 9 de septiembre en un acto en Granada.","imageAuthor":"Miguel Ángel Molina (EFE)","body":"EL PAÍS ofrece de forma gratuita la última hora de la actualidad política. Si quieres apoyar nuestro periodismo, suscríbete.\nEl Tribunal Supremo ha imputado este miércoles al fiscal general del Estado, Álvaro García Ortiz, por revelación de secretos tras la difusión de un comunicado para desmentir un bulo lanzando por el entorno de la presidenta de la Comunidad de Madrid, Isabel Díaz Ayuso. Ortiz ha respondido que seguirá como fiscal pese a la imputación. “En el convencimiento de que la continuidad en el cargo es lo menos gravoso y más prudente para la institución a medio y largo plazo, y de que en puridad refuerza la independencia de la Fiscalía española, anuncio mi intención de seguir”, ha señalado en un comunicado. Posteriormente, el ministro de Justicia, Félix Bolaños, ha ofrecido el “total respaldo” del Ejecutivo a la labor del fiscal general del Estado. “Todo lo que ha hecho ha sido contar la verdad y desmentir un bulo”, ha dicho. El PP, por su parte, ha reclamado su dimisión inmediata. “No puede seguir ni un minuto más en el cargo, dirige la institución encargada de la defensa de la legalidad. Hoy [Alberto Núñez] Feijoó ha pedido al número uno de la trama que se vaya. Yo añadiría, váyanse los dos. No pueden seguir manchando las instituciones”, ha señalado la secretaria general del PP, Cuca Gamarra,","source":"El Pais","__v":0}
+
+###
+
+// Create a new trend (it will create it on today's feed)
+POST http://localhost:3000/trend
+Content-Type: application/json
+
+{"title":"Última hora de la actualidad política, en directo |  El fiscal general del Estado rechaza dimitir pese a la imputación del Supremo y defiende su actuación frente a los bulos","subtitle":"El Gobierno muestra su “total respaldo” a García Ortiz: “Todo lo que ha hecho ha sido contar la verdad y desmentir un bulo”","authorName":"El Pruebas","authorUrl":"https://elpais.com/autor/el-pais/#?rel=author_top","publishedDate":"Actualizado: 16 oct 2024 - 14:44CEST","imageUrl":"https://imagenes.elpais.com/resizer/v2/AV4FC3U32VHMHE2CRIE2ZPD324.jpg?auth=e6984064c65899a15b3812f3317d8a014dee4a1e0077fba8d63e26e83ec2c317&width=414","imageCaption":"El fiscal general del Estado, Álvaro García Ortiz, el pasado 9 de septiembre en un acto en Granada.","imageAuthor":"Miguel Ángel Molina (EFE)","body":"EL PAÍS ofrece de forma gratuita la última hora de la actualidad política. Si quieres apoyar nuestro periodismo, suscríbete.\nEl Tribunal Supremo ha imputado este miércoles al fiscal general del Estado, Álvaro García Ortiz, por revelación de secretos tras la difusión de un comunicado para desmentir un bulo lanzando por el entorno de la presidenta de la Comunidad de Madrid, Isabel Díaz Ayuso. Ortiz ha respondido que seguirá como fiscal pese a la imputación. “En el convencimiento de que la continuidad en el cargo es lo menos gravoso y más prudente para la institución a medio y largo plazo, y de que en puridad refuerza la independencia de la Fiscalía española, anuncio mi intención de seguir”, ha señalado en un comunicado. Posteriormente, el ministro de Justicia, Félix Bolaños, ha ofrecido el “total respaldo” del Ejecutivo a la labor del fiscal general del Estado. “Todo lo que ha hecho ha sido contar la verdad y desmentir un bulo”, ha dicho. El PP, por su parte, ha reclamado su dimisión inmediata. “No puede seguir ni un minuto más en el cargo, dirige la institución encargada de la defensa de la legalidad. Hoy [Alberto Núñez] Feijoó ha pedido al número uno de la trama que se vaya. Yo añadiría, váyanse los dos. No pueden seguir manchando las instituciones”, ha señalado la secretaria general del PP, Cuca Gamarra,","source":"El Pais"}
+
+###
+
+// Delete trend
+DELETE http://localhost:3000/trend/670fb78e0795950285527d98
+Content-Type: application/json
