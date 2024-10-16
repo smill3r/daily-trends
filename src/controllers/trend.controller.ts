@@ -1,24 +1,22 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { ITrend } from "../models/trends.model";
 import { TrendService } from "../services/trend.service";
+import ControllerHandler from "../types/classes/error-handlers/controller-handler";
 
-export class TrendController {
+export class TrendController extends ControllerHandler {
   private trendService: TrendService;
   constructor() {
+    super();
     this.trendService = new TrendService();
   }
 
   public async getTrends(req: IncomingMessage, res: ServerResponse) {
     try {
       const trends = await this.trendService.getTrends();
-      console.log(trends);
       res.statusCode = 200;
-      res.end(JSON.stringify(trends));
-    } catch {
-      res.statusCode = 500;
-      res.end(
-        JSON.stringify({ error: "Error al obtener los trends: " })
-      );
+      res.end(JSON.stringify({ trends: trends }));
+    } catch (err: unknown) {
+      this.catchError(err, res);
     }
   }
 
@@ -31,12 +29,11 @@ export class TrendController {
     req.on("end", async () => {
       const trendData: ITrend = JSON.parse(body);
       try {
-        const newTrend = await this.trendService.createTrend(trendData);
+        const newTrend = await this.trendService.addTrend(trendData);
         res.statusCode = 201;
         res.end(JSON.stringify({ message: "Trend creado", data: newTrend }));
-      } catch {
-        res.statusCode = 500;
-        res.end(JSON.stringify({ error: "Error al crear el trend" }));
+      } catch (err: unknown) {
+        this.catchError(err, res);
       }
     });
   }
@@ -72,9 +69,8 @@ export class TrendController {
             JSON.stringify({ message: "Trend actualizado", data: updatedTrend })
           );
         }
-      } catch {
-        res.statusCode = 500;
-        res.end(JSON.stringify({ error: "Error al actualizar el trend" }));
+      } catch (err: unknown) {
+        this.catchError(err, res);
       }
     });
   }
@@ -96,9 +92,8 @@ export class TrendController {
         res.statusCode = 200;
         res.end(JSON.stringify({ message: "Trend eliminado" }));
       }
-    } catch {
-      res.statusCode = 500;
-      res.end(JSON.stringify({ error: "Error al eliminar el trend" }));
+    } catch (err: unknown) {
+      this.catchError(err, res);
     }
   }
 }
