@@ -1,10 +1,9 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { ITrend } from "./trends.model";
 
 export interface IFeed extends Document {
   title: string;
   date: Date;
-  trends: ITrend[];
+  trends: string[];
 }
 
 const feedSchema: Schema = new Schema({
