@@ -9,8 +9,10 @@ export class FeedRoutes implements Route {
   }
 
   public initializeRoutes(router: Router) {
-    router.post("/trend", (req, res) =>
+    router.post("/feed", (req, res) =>
       this.feedController.generateFeed(req, res)
     );
+    router.get("/feed", (req, res) => this.feedController.getFeed(req, res));
+    router.delete("/feed/:id", (req, res) => this.feedController.deleteFeed(req, res));
   }
 }
