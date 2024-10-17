@@ -1,8 +1,8 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { FeedService } from "../services/feed.service";
-import ControllerHandler from "../types/classes/error-handlers/controller-handler";
+import { BaseController } from "./base-controller";
 
-export class FeedController extends ControllerHandler {
+export class FeedController extends BaseController {
   private feedService: FeedService;
   constructor() {
     super();
@@ -18,7 +18,7 @@ export class FeedController extends ControllerHandler {
         res.end(JSON.stringify({ trends: articles }));
       }
     } catch (err: unknown) {
-      this.catchError(err, res);
+      this.handleError(err, res);
     }
   }
 
@@ -31,7 +31,7 @@ export class FeedController extends ControllerHandler {
         res.end(JSON.stringify({ feed: feed }));
       }
     } catch (err: unknown) {
-      this.catchError(err, res);
+      this.handleError(err, res);
     }
   }
 
@@ -40,20 +40,20 @@ export class FeedController extends ControllerHandler {
 
     if (!id) {
       res.statusCode = 404;
-      res.end(JSON.stringify({ error: "Error al eliminar el feed" }));
+      res.end(JSON.stringify({ error: "Could not receive the feed id" }));
     }
 
     try {
       const deletedTrend = this.feedService.deleteFeed(id!);
       if (!deletedTrend) {
         res.statusCode = 404;
-        res.end(JSON.stringify({ error: "Feed no encontrado" }));
+        res.end(JSON.stringify({ error: "Feed not found" }));
       } else {
         res.statusCode = 200;
-        res.end(JSON.stringify({ message: "Feed eliminado" }));
+        res.end(JSON.stringify({ message: "Feed deleted" }));
       }
     } catch (err: unknown) {
-      this.catchError(err, res);
+      this.handleError(err, res);
     }
   }
 }

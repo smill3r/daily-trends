@@ -1,9 +1,9 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { ITrend } from "../models/trends.model";
 import { TrendService } from "../services/trend.service";
-import ControllerHandler from "../types/classes/error-handlers/controller-handler";
+import { BaseController } from "./base-controller";
 
-export class TrendController extends ControllerHandler {
+export class TrendController extends BaseController {
   private trendService: TrendService;
   constructor() {
     super();
@@ -16,7 +16,7 @@ export class TrendController extends ControllerHandler {
       res.statusCode = 200;
       res.end(JSON.stringify({ trends: trends }));
     } catch (err: unknown) {
-      this.catchError(err, res);
+      this.handleError(err, res);
     }
   }
 
@@ -31,9 +31,9 @@ export class TrendController extends ControllerHandler {
       try {
         const newTrend = await this.trendService.addTrend(trendData);
         res.statusCode = 201;
-        res.end(JSON.stringify({ message: "Trend creado", data: newTrend }));
+        res.end(JSON.stringify({ message: "Trend created", data: newTrend }));
       } catch (err: unknown) {
-        this.catchError(err, res);
+        this.handleError(err, res);
       }
     });
   }
@@ -43,7 +43,7 @@ export class TrendController extends ControllerHandler {
 
     if (!id) {
       res.statusCode = 404;
-      res.end(JSON.stringify({ error: "Error al actualizar el trend" }));
+      res.end(JSON.stringify({ error: "Could not receive the trend id" }));
     }
 
     let body = "";
@@ -62,15 +62,15 @@ export class TrendController extends ControllerHandler {
         );
         if (!updatedTrend) {
           res.statusCode = 404;
-          res.end(JSON.stringify({ error: "Trend no encontrado" }));
+          res.end(JSON.stringify({ error: "Trend not found" }));
         } else {
           res.statusCode = 200;
           res.end(
-            JSON.stringify({ message: "Trend actualizado", data: updatedTrend })
+            JSON.stringify({ message: "Trend updated", data: updatedTrend })
           );
         }
       } catch (err: unknown) {
-        this.catchError(err, res);
+        this.handleError(err, res);
       }
     });
   }
@@ -80,20 +80,20 @@ export class TrendController extends ControllerHandler {
 
     if (!id) {
       res.statusCode = 404;
-      res.end(JSON.stringify({ error: "Error al eliminar el trend" }));
+      res.end(JSON.stringify({ error: "Error receiving the trend id" }));
     }
 
     try {
       const deletedTrend = this.trendService.deleteTrend(id!);
       if (!deletedTrend) {
         res.statusCode = 404;
-        res.end(JSON.stringify({ error: "Trend no encontrado" }));
+        res.end(JSON.stringify({ error: "Trend not found" }));
       } else {
         res.statusCode = 200;
-        res.end(JSON.stringify({ message: "Trend eliminado" }));
+        res.end(JSON.stringify({ message: "Trend deleted" }));
       }
     } catch (err: unknown) {
-      this.catchError(err, res);
+      this.handleError(err, res);
     }
   }
 }
