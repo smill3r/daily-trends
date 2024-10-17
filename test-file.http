@@ -1,5 +1,5 @@
 
-// Create feed (trough scrapping)
+// Create feed (trough scrapping, it takes aprox 3 seconds)
 POST http://localhost:3000/feed
 
 ###
@@ -10,7 +10,7 @@ GET http://localhost:3000/feed
 ###
 
 // Delete feed by id
-DELETE http://localhost:3000/feed/670fc3635adca4b99eecf63a
+DELETE http://localhost:3000/feed/6710f7e84c04d6174e0ec54e
 
 ###
 
@@ -37,5 +37,5 @@ Content-Type: application/json
 ###
 
 // Delete trend
-DELETE http://localhost:3000/trend/670fb78e0795950285527d98
+DELETE http://localhost:3000/trend/670fe7fbe942d617a3fe5a2b
 Content-Type: application/json
