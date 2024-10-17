@@ -54,6 +54,16 @@ En el archivo test-file.http puedes encontrar ejemplos de peticiones HTTP para h
 
 ## Diseño
 
+El sistema es muy sencillo, no es más que una API de NodeJS que ejecuta un servidor HTTP y recibe peticiones del cliente para generar el Feed y proveer las noticias rascadas. Descarga los documentos HTML directo desde los servicios web de los sitios de noticias y guarda la información rascada en una base de datos MongoDB. Ambos se ejecutan en contenedores como microservicios.
+
+![systemDesignImage](https://github.com/user-attachments/assets/52b3212e-cf4c-49d5-b432-5797a82116dc)
+
+Todos los archivos de la API fueron escritos en forma de clases, pero resalto las clases diseñadas para elaborar el web scrapping a continuación:
+
+![umlDiagram](https://github.com/user-attachments/assets/df03f176-e5f0-4fc9-b27e-acc141194291)
+
+La clase scrapper define la lógica del rascado de noticias, las clases que la extienden se encargan solo de proveer la configuración y los tipos, de manera que se pueden crear y editar más clases de otros sitios sin alterar directamente la funcionalidad del rascado.
+
 ## Notas
 
 Como notas respecto al diseño de la API y en cuanto a su escalabilidad me gustaría agregar lo siguiente:
